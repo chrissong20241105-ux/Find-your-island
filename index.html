@@ -3,462 +3,1191 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>找到你的完美马尔代夫海岛</title>
+  <title>找到你的完美海岛 · V0.5</title>
   <style>
+    :root {
+      --bg1: #0f6fff;
+      --bg2: #00c6a7;
+      --bg3: #7dd3fc;
+      --card: rgba(255,255,255,.14);
+      --card-border: rgba(255,255,255,.22);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,.78);
+      --shadow: 0 20px 60px rgba(0,0,0,.18);
+      --dark: #0f172a;
+      --accent: #22d3ee;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 30px 20px;
-      background: linear-gradient(135deg, #87CEEB 0%, #1E90FF 100%);
       min-height: 100vh;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.18), transparent 22%),
+        radial-gradient(circle at 82% 18%, rgba(255,255,255,.16), transparent 18%),
+        radial-gradient(circle at 72% 78%, rgba(255,255,255,.12), transparent 20%),
+        linear-gradient(135deg, var(--bg1), var(--bg2) 45%, var(--bg3));
+      overflow-x: hidden;
     }
-    .container {
-      background: white;
-      border-radius: 24px;
-      padding: 40px 30px;
-      box-shadow: 0 15px 50px rgba(0,0,0,0.18);
+
+    .floating {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
     }
-    h1 {
-      color: #006064;
-      text-align: center;
-      font-size: 2.2em;
-      margin-bottom: 12px;
+
+    .bubble {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      filter: blur(2px);
+      animation: floatY 16s ease-in-out infinite;
     }
-    .subtitle {
-      text-align: center;
-      color: #555;
-      font-size: 1.1em;
-      line-height: 1.6;
-      margin-bottom: 35px;
+
+    .bubble:nth-child(1) { width: 160px; height: 160px; left: 6%; top: 10%; }
+    .bubble:nth-child(2) { width: 220px; height: 220px; right: 8%; top: 12%; animation-delay: -4s; }
+    .bubble:nth-child(3) { width: 140px; height: 140px; left: 12%; bottom: 12%; animation-delay: -8s; }
+    .bubble:nth-child(4) { width: 260px; height: 260px; right: 12%; bottom: 8%; animation-delay: -11s; }
+
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
     }
-    .intro {
-      background: #f5faff;
-      padding: 18px;
-      border-radius: 12px;
-      margin-bottom: 28px;
-      border-left: 4px solid #0288d1;
-      line-height: 1.7;
-      color: #333;
+
+    .app {
+      width: min(980px, calc(100% - 28px));
+      margin: 28px auto;
+      padding: 24px;
     }
-    .question {
-      margin: 22px 0;
-      padding: 22px;
-      background: #f0f8ff;
-      border-radius: 16px;
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
     }
-    h3 {
-      color: #0277bd;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.24);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand small {
+      display: block;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .progress-wrap {
+      padding: 14px 16px;
+      border-radius: 18px;
+      min-width: 230px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .progress {
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #dff9ff, #67e8f9);
+      transition: width .35s ease;
+    }
+
+    .screen {
+      min-height: 72vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .panel {
+      width: 100%;
+      border-radius: 28px;
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), transparent),
+        radial-gradient(circle at top right, rgba(255,255,255,.1), transparent 24%);
+      pointer-events: none;
+    }
+
+    .question-header {
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 13px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+      margin-bottom: 10px;
+    }
+
+    .question-title {
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.08;
+      font-weight: 800;
       margin-bottom: 14px;
-      font-size: 1.2em;
     }
+
+    .question-desc {
+      color: rgba(255,255,255,.84);
+      font-size: 16px;
+      line-height: 1.75;
+      max-width: 720px;
+    }
+
     .options {
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
     }
-    .option label {
-      display: block;
-      padding: 14px;
-      background: white;
-      border: 2px solid #e1f5fe;
-      border-radius: 10px;
+
+    .option {
+      border-radius: 22px;
+      padding: 20px 18px;
       cursor: pointer;
-      transition: all 0.25s;
-      line-height: 1.5;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .option label:hover {
-      border-color: #0288d1;
-      transform: translateX(3px);
-    }
-    .option input {
-      margin-right: 10px;
-      transform: scale(1.15);
-    }
-    button {
-      background: #0288d1;
-      color: white;
-      border: none;
-      padding: 15px 40px;
-      font-size: 1.15em;
-      border-radius: 10px;
-      cursor: pointer;
-      display: block;
-      margin: 30px auto;
-      transition: all 0.25s;
-      box-shadow: 0 4px 12px rgba(2,136,209,0.3);
-    }
-    button:hover {
-      background: #01579b;
+
+    .option:hover {
       transform: translateY(-2px);
+      border-color: rgba(255,255,255,.36);
+      background: rgba(255,255,255,.14);
     }
-    .result {
-      margin-top: 35px;
-      padding: 28px;
-      background: #e0f7fa;
-      border-radius: 16px;
-      display: none;
+
+    .option-icon {
+      font-size: 26px;
+      margin-bottom: 14px;
     }
-    .result h2 {
-      color: #006064;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .island-card {
-      background: white;
-      padding: 24px;
-      border-radius: 14px;
-      margin-top: 18px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
-    .island-card h3 {
-      color: #0288d1;
-      font-size: 1.5em;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .island-desc {
-      text-align: center;
-      font-size: 1em;
-      line-height: 1.7;
-      color: #444;
-      margin-bottom: 16px;
-    }
-    .island-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin: 16px 0;
-    }
-    .info-item {
-      background: #f8fbff;
-      padding: 12px 14px;
-      border-radius: 8px;
-      line-height: 1.6;
-    }
-    .features-list h4,
-    .pros h4,
-    .cons h4 {
+
+    .option-title {
+      font-size: 18px;
+      font-weight: 700;
       margin-bottom: 8px;
     }
-    .features-list ul,
-    .pros ul,
-    .cons ul {
-      padding-left: 18px;
-      line-height: 1.8;
+
+    .option-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.6;
     }
-    .pros-cons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-btn {
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08);
+      color: white;
+      padding: 12px 18px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: .2s ease;
+      font-size: 14px;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255,255,255,.16);
+    }
+
+    .nav-btn[disabled] {
+      opacity: .38;
+      cursor: not-allowed;
+    }
+
+    .result-wrap {
+      width: 100%;
+    }
+
+    .result-hero {
+      border-radius: 28px;
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+
+    .result-hero h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      line-height: 1.12;
+      margin-bottom: 10px;
+    }
+
+    .result-hero p {
+      color: rgba(255,255,255,.84);
+      line-height: 1.8;
+      max-width: 760px;
+    }
+
+    .answers-chip-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 18px;
     }
-    .pros {
-      background: #e8f5e9;
-      padding: 15px;
-      border-radius: 10px;
+
+    .chip {
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
     }
-    .cons {
-      background: #ffebee;
-      padding: 15px;
-      border-radius: 10px;
+
+    .cards {
+      display: grid;
+      gap: 18px;
     }
-    .reset-btn {
-      background: #78909c;
+
+    .result-card {
+      border-radius: 26px;
+      overflow: hidden;
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      align-items: end;
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.18);
     }
-    .reset-btn:hover {
-      background: #546e7a;
+
+    .result-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.22) 35%, rgba(0,0,0,.72));
     }
-    @media (max-width: 680px) {
-      .island-grid, .pros-cons {
+
+    .result-content {
+      position: relative;
+      z-index: 1;
+      padding: 26px;
+      width: 100%;
+    }
+
+    .rank {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.16);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .result-title-row {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .result-title h3 {
+      font-size: 28px;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+
+    .result-title p {
+      color: rgba(255,255,255,.82);
+      font-size: 14px;
+    }
+
+    .score-badge {
+      min-width: 92px;
+      text-align: center;
+      border-radius: 18px;
+      padding: 12px 10px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .score-badge strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .score-badge span {
+      font-size: 12px;
+      color: rgba(255,255,255,.8);
+    }
+
+    .summary {
+      color: rgba(255,255,255,.92);
+      line-height: 1.8;
+      max-width: 820px;
+      margin-bottom: 16px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .meta-item {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px;
+      min-height: 78px;
+    }
+
+    .meta-item small {
+      display: block;
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .meta-item strong {
+      display: block;
+      line-height: 1.5;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .why {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 18px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+
+    .why h4 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .why ul {
+      padding-left: 18px;
+      line-height: 1.85;
+      color: rgba(255,255,255,.92);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.12);
+      font-size: 13px;
+      color: rgba(255,255,255,.9);
+    }
+
+    .result-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    .action-btn {
+      border: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: .2s ease;
+    }
+
+    .primary-btn {
+      color: #083344;
+      background: linear-gradient(90deg, #dff9ff, #8ef9f3);
+    }
+
+    .secondary-btn {
+      color: white;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .note {
+      margin-top: 16px;
+      text-align: center;
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .fade-in {
+      animation: fadeInUp .45s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .options {
         grid-template-columns: 1fr;
       }
-      .container {
-        padding: 24px 18px;
+      .meta-grid {
+        grid-template-columns: 1fr 1fr;
       }
-      h1 {
-        font-size: 1.8em;
+    }
+
+    @media (max-width: 560px) {
+      .app {
+        width: min(100% - 16px, 980px);
+        margin: 8px auto 18px;
+        padding: 10px;
+      }
+      .panel {
+        padding: 22px 18px;
+      }
+      .meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .result-title-row {
+        flex-direction: column;
+      }
+      .score-badge {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🏝️ 找到你的完美马尔代夫海岛</h1>
-    <p class="subtitle">无广告 · 真实测评 · 智能匹配 · 找到最适合你的那座岛</p>
+  <div class="floating">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
 
-    <div class="intro">
-      先回答 4 个最关键的问题。我会根据你的预算、出行类型、体验偏好和上岛接受度，
-      给出最适合你的海岛推荐。
+  <div class="app">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-badge">🏝️</div>
+        <div>
+          找到你的完美海岛
+          <small>V0.5 · 马尔代夫场景演示版</small>
+        </div>
+      </div>
+
+      <div class="progress-wrap glass">
+        <div class="progress-meta">
+          <span id="progressText">问题 1 / 5</span>
+          <span id="progressHint">1分钟完成</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
     </div>
 
-    <form id="quizForm">
-      <div class="question">
-        <h3>1. 你的预算大概是？</h3>
-        <div class="options">
-          <div class="option"><label><input type="radio" name="budget" value="low" required> A. 性价比优先（两个人 2000-8000）</label></div>
-          <div class="option"><label><input type="radio" name="budget" value="mid"> B. 中高端度假（两个人 8000-20000）</label></div>
-          <div class="option"><label><input type="radio" name="budget" value="high"> C. 奢华体验（两个人 20000+）</label></div>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>2. 你更像哪类出行人群？</h3>
-        <div class="options">
-          <div class="option"><label><input type="radio" name="travelType" value="honeymoon" required> A. 蜜月 / 情侣</label></div>
-          <div class="option"><label><input type="radio" name="travelType" value="family"> B. 亲子家庭</label></div>
-          <div class="option"><label><input type="radio" name="travelType" value="diver"> C. 潜水 / 浮潜爱好者</label></div>
-          <div class="option"><label><input type="radio" name="travelType" value="photo"> D. 休闲度假 + 拍照打卡</label></div>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>3. 你最在意哪种体验？</h3>
-        <div class="options">
-          <div class="option"><label><input type="radio" name="priority" value="snorkeling" required> A. 浮潜和海洋生物</label></div>
-          <div class="option"><label><input type="radio" name="priority" value="luxury"> B. 酒店奢华和服务</label></div>
-          <div class="option"><label><input type="radio" name="priority" value="value"> C. 性价比和轻松度假</label></div>
-          <div class="option"><label><input type="radio" name="priority" value="photo"> D. 拍照出片和景色</label></div>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>4. 你能接受的上岛方式是？</h3>
-        <div class="options">
-          <div class="option"><label><input type="radio" name="transfer" value="fast" required> A. 越快越好，快艇最好</label></div>
-          <div class="option"><label><input type="radio" name="transfer" value="plane"> B. 可以接受水飞 / 内飞</label></div>
-          <div class="option"><label><input type="radio" name="transfer" value="any"> C. 只要岛好，多久都行</label></div>
-        </div>
-      </div>
-
-      <button type="submit">生成我的推荐</button>
-    </form>
-
-    <div class="result" id="result"></div>
+    <div class="screen">
+      <div class="panel glass fade-in" id="panel"></div>
+    </div>
   </div>
 
   <script>
-    const islands = {
-      maafushi: {
-        name: "马富士居民岛（Maafushi）",
-        description: "马尔代夫最成熟的经济型旅行目的地，预算有限想体验马尔代夫的首选。",
-        budgetTag: "low",
-        travelTags: ["family", "photo"],
-        priorityTags: ["value"],
-        transferTag: "fast",
-        budget: "💰 预算：两个人 2000-4000",
-        bestFor: "👉 适合：背包客、经济型旅行、第一次去马代",
-        style: "🏝️ 风格：本土风情",
-        transfer: "🛥️ 上岛：快艇约25分钟",
-        food: "🍽️ 餐饮：本地餐厅多，便宜好吃",
-        sand: "🌴 沙滩：⭐⭐⭐",
-        snorkeling: "🤿 浮潜：⭐⭐⭐⭐",
-        features: [
-          "💰 花费低，性价比高",
-          "👨‍👩‍👧‍👦 适合家庭和年轻人",
-          "🍴 本地生活体验强",
-          "🚤 上岛方便"
-        ],
-        pros: [
-          "价格友好",
-          "交通方便",
-          "适合第一次体验马尔代夫",
-          "出海项目丰富"
-        ],
-        cons: [
-          "不够奢华",
-          "私密性一般",
-          "不是典型顶级度假村路线"
+    const questions = [
+      {
+        key: "budget",
+        eyebrow: "Question 01",
+        title: "你的预算大概是？",
+        desc: "先把明显不合适的价格带排掉，减少无效推荐。",
+        options: [
+          { value: "budget", icon: "💸", title: "5k–1w / 人", desc: "更关注性价比，先把体验做对。" },
+          { value: "mid", icon: "🌊", title: "1w–2w / 人", desc: "中高端度假，可接受品质升级。" },
+          { value: "high", icon: "✨", title: "2w–4w / 人", desc: "希望体验更完整，酒店和服务更重要。" },
+          { value: "ultra", icon: "💎", title: "4w+ / 人", desc: "顶奢预算，优先考虑体验上限。" }
         ]
       },
-      chevalBlanc: {
-        name: "白马庄园（Cheval Blanc）",
-        description: "LV集团旗下顶奢马尔代夫度假村，极致服务和私密体验，是顶级奢华天花板。",
-        budgetTag: "high",
-        travelTags: ["honeymoon", "photo"],
-        priorityTags: ["luxury"],
-        transferTag: "plane",
-        budget: "💰 预算：两个人 35000+/晚",
-        bestFor: "👉 适合：奢华度假、顶级蜜月",
-        style: "💎 风格：老钱顶奢",
-        transfer: "✈️ 上岛：水飞约25分钟",
-        food: "🍽️ 餐饮：米其林主厨级别",
-        sand: "🌴 沙滩：⭐⭐⭐⭐⭐",
-        snorkeling: "🤿 浮潜：⭐⭐⭐⭐",
-        features: [
-          "💎 LV集团顶级服务",
-          "🏡 超大私人别墅",
-          "👨‍🍳 高端餐饮体验",
-          "🔒 私密度极高"
-        ],
-        pros: [
-          "服务天花板",
-          "非常适合蜜月",
-          "餐饮强",
-          "硬件顶级"
-        ],
-        cons: [
-          "价格极高",
-          "预算门槛高",
-          "不是主打性价比"
+      {
+        key: "group",
+        eyebrow: "Question 02",
+        title: "你是和谁一起去？",
+        desc: "不同人群，对私密性、服务、活动和交通的容忍度都不一样。",
+        options: [
+          { value: "couple", icon: "💘", title: "蜜月 / 情侣", desc: "更看重浪漫、私密和氛围感。" },
+          { value: "family", icon: "👨‍👩‍👧‍👦", title: "亲子家庭", desc: "更看重省心、安全、餐饮和便利度。" },
+          { value: "friends", icon: "🕶️", title: "朋友出行", desc: "想兼顾体验、拍照和预算。" },
+          { value: "solo", icon: "🧘", title: "一个人放松", desc: "更在意安静、舒适和不折腾。" }
         ]
       },
-      olhuveli: {
-        name: "双鱼岛（Olhuveli）",
-        description: "老牌经典高性价比海岛，浮潜很强，是很多人第一次去马代的热门选择。",
-        budgetTag: "mid",
-        travelTags: ["diver", "honeymoon", "family"],
-        priorityTags: ["snorkeling", "value"],
-        transferTag: "fast",
-        budget: "💰 预算：两个人 8000-15000",
-        bestFor: "👉 适合：潜水爱好者、性价比度假",
-        style: "🌴 风格：经典热带度假风",
-        transfer: "🛥️ 上岛：快艇约45分钟",
-        food: "🍽️ 餐饮：半餐 / 一价全包可选",
-        sand: "🌴 沙滩：⭐⭐⭐⭐",
-        snorkeling: "🤿 浮潜：⭐⭐⭐⭐⭐",
-        features: [
-          "🤿 岸边浮潜非常好",
-          "💰 性价比高",
-          "🐟 容易看到海洋生物",
-          "📸 拖尾沙滩好拍"
-        ],
-        pros: [
-          "浮潜出色",
-          "价格相对合理",
-          "适合第一次住度假村",
-          "综合表现均衡"
-        ],
-        cons: [
-          "设施有些年份感",
-          "旺季较热门"
+      {
+        key: "priority",
+        eyebrow: "Question 03",
+        title: "你最在意什么？",
+        desc: "先抓住最核心的一件事，V0.5 先做单选，后面我们再升级成“可选 2 项”。",
+        options: [
+          { value: "marine", icon: "🤿", title: "浮潜 / 潜水", desc: "想看珊瑚、海龟、鱼群，最好下海就精彩。" },
+          { value: "scenery", icon: "🌴", title: "沙滩和海水颜值", desc: "更在意玻璃海、拖尾沙滩和风景。" },
+          { value: "luxury", icon: "🛎️", title: "酒店奢华和服务", desc: "更看重住得好、服务强、体验完整。" },
+          { value: "value", icon: "📉", title: "性价比和省心", desc: "不想花冤枉钱，也不想太折腾。" }
         ]
       },
-      sonevaJani: {
-        name: "索尼娃贾尼（Soneva Jani）",
-        description: "马代最有名的网红岛之一，屋顶滑梯、水上别墅和极强的视觉冲击力让它非常适合拍照和蜜月。",
-        budgetTag: "high",
-        travelTags: ["honeymoon", "photo"],
-        priorityTags: ["photo", "luxury"],
-        transferTag: "plane",
-        budget: "💰 预算：两个人 30000-60000",
-        bestFor: "👉 适合：网红打卡、拍照、蜜月",
-        style: "📸 风格：现代网红轻奢风",
-        transfer: "✈️ 上岛：水飞约40分钟",
-        food: "🍽️ 餐饮：创意料理",
-        sand: "🌴 沙滩：⭐⭐⭐⭐⭐",
-        snorkeling: "🤿 浮潜：⭐⭐⭐⭐",
-        features: [
-          "🛝 屋顶滑梯入海",
-          "📸 非常出片",
-          "🌌 星空体验浪漫",
-          "🌿 环保自然设计"
-        ],
-        pros: [
-          "拍照效果极强",
-          "很适合蜜月",
-          "品牌辨识度高",
-          "体验感独特"
-        ],
-        cons: [
-          "价格高",
-          "旺季难订",
-          "更偏拍照和体验，不是纯性价比路线"
+      {
+        key: "transfer",
+        eyebrow: "Question 04",
+        title: "你能接受怎样的上岛方式？",
+        desc: "对很多中国客人来说，上岛的折腾程度，和酒店本身一样重要。",
+        options: [
+          { value: "boat", icon: "🚤", title: "只接受快艇", desc: "越省心越好，不想再折腾。" },
+          { value: "seaplane", icon: "✈️", title: "可以接受水飞", desc: "愿意为景色和体验多花一点时间。" },
+          { value: "domestic", icon: "🧳", title: "内飞 + 快艇也可以", desc: "只要岛够值，转运复杂一点能接受。" },
+          { value: "any", icon: "🗺️", title: "只要岛好都行", desc: "最终体验最重要，过程不那么敏感。" }
         ]
+      },
+      {
+        key: "vibe",
+        eyebrow: "Question 05",
+        title: "你更想要哪种度假感觉？",
+        desc: "这题决定推荐的气质方向，是轻松躺平、浪漫蜜月，还是更偏顶奢或拍照。",
+        options: [
+          { value: "relax", icon: "🍹", title: "轻松躺平", desc: "舒适、省心、慢慢泡着就好。" },
+          { value: "romance", icon: "🌹", title: "浪漫蜜月感", desc: "想要氛围感、私密感、仪式感。" },
+          { value: "luxury", icon: "👑", title: "奢华仪式感", desc: "酒店、服务、设计都要在线。" },
+          { value: "nature", icon: "🐠", title: "原生态海洋体验", desc: "更偏自然、海洋、生物和探索。" },
+          { value: "photo", icon: "📸", title: "网红拍照感", desc: "拖尾沙滩、水屋、视觉冲击力都很重要。" }
+        ]
+      }
+    ];
+
+    const islands = [
+      {
+        id: "cheval-blanc",
+        name: "白马庄园",
+        en: "Cheval Blanc Randheli",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
+        summary: "顶奢老钱风代表，服务和私密度几乎拉满，适合预算充足、希望一站式把体验做满的用户。",
+        budget: "ultra",
+        groups: ["couple", "friends"],
+        transfer: "seaplane",
+        style: "老钱顶奢 · 极强私密性",
+        tags: ["顶奢", "蜜月", "服务天花板", "私密"],
+        meta: {
+          budget: "4w+ / 人",
+          transfer: "水飞约 25 分钟",
+          bestFor: "高预算蜜月、顶奢度假",
+          atmosphere: "优雅、安静、服务极强"
+        },
+        strengths: {
+          marine: 6,
+          scenery: 9,
+          luxury: 10,
+          value: 4,
+          relax: 9,
+          romance: 10,
+          photo: 8,
+          privacy: 10
+        },
+        why: [
+          "如果你更看重酒店和服务，这家基本是‘稳准狠’的顶级选项。",
+          "私密性很强，特别适合高预算情侣和蜜月。",
+          "它不一定是最会打‘浮潜牌’的，但住感和服务感通常是第一梯队。"
+        ],
+        tradeoff: "价格门槛高，海洋生态不是它最强的卖点。"
+      },
+      {
+        id: "soneva-jani",
+        name: "索尼娃贾尼",
+        en: "Soneva Jani",
+        image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=80",
+        summary: "网红度、拍照感、梦幻度都非常强，屋顶滑梯和玻璃海辨识度极高，特别适合想要‘记忆点’的用户。",
+        budget: "ultra",
+        groups: ["couple", "friends"],
+        transfer: "seaplane",
+        style: "现代轻奢 · 网红辨识度极高",
+        tags: ["拍照", "蜜月", "梦幻感", "顶奢"],
+        meta: {
+          budget: "3w–6w / 人",
+          transfer: "水飞约 40 分钟",
+          bestFor: "蜜月、拍照、网红感度假",
+          atmosphere: "梦幻、轻盈、视觉冲击强"
+        },
+        strengths: {
+          marine: 7,
+          scenery: 10,
+          luxury: 9,
+          value: 4,
+          relax: 8,
+          romance: 9,
+          photo: 10,
+          privacy: 8
+        },
+        why: [
+          "如果你最看重‘出片’，它会非常靠前。",
+          "度假气质偏梦幻和高辨识度，适合想要仪式感和分享感的人。",
+          "比起性价比，它更适合追求体验峰值。"
+        ],
+        tradeoff: "价格高，且更偏视觉和体验，不是纯性价比路线。"
+      },
+      {
+        id: "huvafen-fushi",
+        name: "芙花芬",
+        en: "Huvafen Fushi",
+        image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1600&q=80",
+        summary: "设计感和成熟度都很强，水下 SPA、轻奢氛围和整体完成度高，适合重视体验质感的情侣。",
+        budget: "high",
+        groups: ["couple", "friends"],
+        transfer: "boat",
+        style: "轻奢设计感 · 都市审美系海岛",
+        tags: ["轻奢", "设计感", "情侣", "SPA"],
+        meta: {
+          budget: "2w–4w / 人",
+          transfer: "快艇约 30 分钟",
+          bestFor: "情侣、轻奢放松、重体验质感的人",
+          atmosphere: "精致、成熟、适合慢住"
+        },
+        strengths: {
+          marine: 8,
+          scenery: 8,
+          luxury: 9,
+          value: 6,
+          relax: 9,
+          romance: 9,
+          photo: 8,
+          privacy: 8
+        },
+        why: [
+          "如果你想要‘不折腾 + 有质感 + 适合情侣’，它是很平衡的一类。",
+          "快艇上岛对第一次去马代的人更友好。",
+          "整体体验比较完整，没有特别明显的短板。"
+        ],
+        tradeoff: "不是最便宜，也不是最强生态型，属于均衡偏高端路线。"
+      },
+      {
+        id: "olhuveli",
+        name: "双鱼岛",
+        en: "Olhuveli",
+        image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+        summary: "老牌经典的高性价比热门岛，浮潜表现亮眼，快艇上岛也相对省心，是很多人第一次住马代度假村的热门选项。",
+        budget: "mid",
+        groups: ["couple", "family", "friends"],
+        transfer: "boat",
+        style: "经典热带度假风 · 均衡型选手",
+        tags: ["高性价比", "浮潜不错", "经典不出错", "初次友好"],
+        meta: {
+          budget: "1w–2w / 人",
+          transfer: "快艇约 45 分钟",
+          bestFor: "第一次去马代、想平衡预算和体验的人",
+          atmosphere: "经典、热带、比较稳"
+        },
+        strengths: {
+          marine: 9,
+          scenery: 8,
+          luxury: 6,
+          value: 9,
+          relax: 8,
+          romance: 7,
+          photo: 7,
+          privacy: 6
+        },
+        why: [
+          "如果你要浮潜、又不想预算过高，它通常会非常靠前。",
+          "快艇上岛相对省心，对第一次去马代比较友好。",
+          "综合表现均衡，不容易踩大坑。"
+        ],
+        tradeoff: "设施不是顶奢路线，私密度和设计感不如超高端岛。"
+      },
+      {
+        id: "maafushi",
+        name: "马富士",
+        en: "Maafushi",
+        image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=80",
+        summary: "预算友好、本地生活感强、出海项目丰富，是想先用低预算感受马代的典型选择。",
+        budget: "budget",
+        groups: ["family", "friends", "solo"],
+        transfer: "boat",
+        style: "本土风情 · 轻松不贵",
+        tags: ["预算友好", "本地岛", "出海多", "第一次尝鲜"],
+        meta: {
+          budget: "5k–1w / 人",
+          transfer: "快艇约 25 分钟",
+          bestFor: "预算有限、想先体验马代的人",
+          atmosphere: "接地气、轻松、活动灵活"
+        },
+        strengths: {
+          marine: 7,
+          scenery: 5,
+          luxury: 2,
+          value: 10,
+          relax: 6,
+          romance: 4,
+          photo: 5,
+          privacy: 2
+        },
+        why: [
+          "如果你最看重性价比，它几乎一定会上榜。",
+          "交通方便、花费低，适合第一次‘试水马代’。",
+          "它不是奢华度假岛，而是‘更容易开始’的一类。"
+        ],
+        tradeoff: "私密性和顶奢感弱，不适合高预算蜜月期待。"
+      },
+      {
+        id: "furaveri",
+        name: "芙拉薇莉",
+        en: "Furaveri Maldives",
+        image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1600&q=80",
+        summary: "比较均衡、对家庭和中高预算用户友好，沙滩和环境都在线，属于‘不浮夸但住得舒服’的路线。",
+        budget: "mid",
+        groups: ["family", "couple", "friends"],
+        transfer: "seaplane",
+        style: "热带自然风 · 均衡舒适型",
+        tags: ["家庭友好", "均衡", "沙滩不错", "住感稳定"],
+        meta: {
+          budget: "1w–2w / 人",
+          transfer: "水飞约 45 分钟",
+          bestFor: "家庭、情侣、中高预算的稳妥选择",
+          atmosphere: "放松、热带、适合慢度假"
+        },
+        strengths: {
+          marine: 7,
+          scenery: 8,
+          luxury: 7,
+          value: 8,
+          relax: 9,
+          romance: 7,
+          photo: 7,
+          privacy: 7
+        },
+        why: [
+          "如果你不追求最网红，但想整体舒服、稳妥、适合多人出行，它会很靠前。",
+          "对亲子和情侣都比较友好，属于容易推荐的均衡型选手。",
+          "它的长板不是单点爆炸，而是整体体验不容易翻车。"
+        ],
+        tradeoff: "风格不算最强辨识度，顶奢感和拍照冲击力不是最顶。"
+      },
+      {
+        id: "ayada",
+        name: "阿雅达",
+        en: "Ayada Maldives",
+        image: "https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=1600&q=80",
+        summary: "泄湖很美，蜜月和一价全包体验都不错，整体氛围很讨喜，适合想要‘浪漫但不过于夸张’的客人。",
+        budget: "high",
+        groups: ["couple", "family"],
+        transfer: "domestic",
+        style: "热带奢华风 · 浪漫感强",
+        tags: ["蜜月", "泄湖漂亮", "度假感强", "中高端"],
+        meta: {
+          budget: "2w–4w / 人",
+          transfer: "内飞 + 快艇",
+          bestFor: "重视浪漫、景色和完整度假的用户",
+          atmosphere: "热带、浪漫、拍照友好"
+        },
+        strengths: {
+          marine: 6,
+          scenery: 9,
+          luxury: 8,
+          value: 7,
+          relax: 8,
+          romance: 9,
+          photo: 8,
+          privacy: 7
+        },
+        why: [
+          "如果你想要浪漫、景色和完整的度假感，它很容易高分。",
+          "泄湖和整体海水颜色很讨喜，视觉感受强。",
+          "适合愿意接受稍复杂转运、换取更完整体验的人。"
+        ],
+        tradeoff: "上岛更折腾，不适合特别怕转运的人。"
+      }
+    ];
+
+    const labels = {
+      budget: {
+        budget: "5k–1w / 人",
+        mid: "1w–2w / 人",
+        high: "2w–4w / 人",
+        ultra: "4w+ / 人"
+      },
+      group: {
+        couple: "蜜月 / 情侣",
+        family: "亲子家庭",
+        friends: "朋友出行",
+        solo: "一个人放松"
+      },
+      priority: {
+        marine: "浮潜 / 潜水",
+        scenery: "沙滩和海水颜值",
+        luxury: "酒店奢华和服务",
+        value: "性价比和省心"
+      },
+      transfer: {
+        boat: "只接受快艇",
+        seaplane: "可以接受水飞",
+        domestic: "内飞 + 快艇也可以",
+        any: "只要岛好都行"
+      },
+      vibe: {
+        relax: "轻松躺平",
+        romance: "浪漫蜜月感",
+        luxury: "奢华仪式感",
+        nature: "原生态海洋体验",
+        photo: "网红拍照感"
       }
     };
 
-    function calculateMatch(answers) {
-      const scores = [];
+    const answers = {};
+    let currentStep = 0;
 
-      for (const key in islands) {
-        const island = islands[key];
-        let score = 0;
+    const panel = document.getElementById("panel");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
 
-        if (answers.budget === island.budgetTag) score += 3;
-        if (island.travelTags.includes(answers.travelType)) score += 3;
-        if (island.priorityTags.includes(answers.priority)) score += 4;
-
-        if (answers.transfer === "any") {
-          score += 2;
-        } else if (answers.transfer === island.transferTag) {
-          score += 2;
-        }
-
-        scores.push({ ...island, score });
-      }
-
-      scores.sort((a, b) => b.score - a.score);
-      return scores[0];
+    function updateProgress() {
+      const total = questions.length;
+      const current = Math.min(currentStep + 1, total);
+      const percent = currentStep >= total ? 100 : ((currentStep) / total) * 100;
+      progressBar.style.width = `${percent}%`;
+      progressText.textContent = currentStep >= total ? "推荐结果" : `问题 ${current} / ${total}`;
     }
 
-    document.getElementById("quizForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+    function renderQuestion() {
+      const q = questions[currentStep];
+      updateProgress();
 
-      const answers = {
-        budget: document.querySelector('input[name="budget"]:checked')?.value,
-        travelType: document.querySelector('input[name="travelType"]:checked')?.value,
-        priority: document.querySelector('input[name="priority"]:checked')?.value,
-        transfer: document.querySelector('input[name="transfer"]:checked')?.value
-      };
+      panel.className = "panel glass fade-in";
+      panel.innerHTML = `
+        <div class="question-header">
+          <div class="eyebrow">${q.eyebrow}</div>
+          <div class="question-title">${q.title}</div>
+          <div class="question-desc">${q.desc}</div>
+        </div>
 
-      const matched = calculateMatch(answers);
-      const result = document.getElementById("result");
-
-      if (!matched) {
-        result.style.display = "block";
-        result.innerHTML = `
-          <h2>暂时没有匹配结果</h2>
-          <p style="text-align:center;">请调整一下你的选项后重试。</p>
-        `;
-        return;
-      }
-
-      result.innerHTML = `
-        <h2>🎯 你的推荐结果</h2>
-        <div class="island-card">
-          <h3>${matched.name}</h3>
-          <p class="island-desc">${matched.description}</p>
-
-          <div class="island-grid">
-            <div class="info-item"><strong>${matched.budget}</strong></div>
-            <div class="info-item"><span>${matched.bestFor}</span></div>
-            <div class="info-item"><span>${matched.style}</span></div>
-            <div class="info-item"><span>${matched.transfer}</span></div>
-            <div class="info-item"><span>${matched.food}</span></div>
-            <div class="info-item"><span>${matched.sand}</span></div>
-            <div class="info-item"><span>${matched.snorkeling}</span></div>
-            <div class="info-item"><strong>匹配分：${matched.score}</strong></div>
-          </div>
-
-          <div class="features-list">
-            <h4>✨ 特色亮点</h4>
-            <ul>
-              ${matched.features.map(f => `<li>${f}</li>`).join('')}
-            </ul>
-          </div>
-
-          <div class="pros-cons">
-            <div class="pros">
-              <h4>✅ 优点</h4>
-              <ul>
-                ${matched.pros.map(p => `<li>${p}</li>`).join('')}
-              </ul>
+        <div class="options">
+          ${q.options.map(option => `
+            <div class="option" data-value="${option.value}">
+              <div>
+                <div class="option-icon">${option.icon}</div>
+                <div class="option-title">${option.title}</div>
+              </div>
+              <div class="option-desc">${option.desc}</div>
             </div>
-            <div class="cons">
-              <h4>⚠️ 缺点</h4>
-              <ul>
-                ${matched.cons.map(c => `<li>${c}</li>`).join('')}
-              </ul>
-            </div>
-          </div>
+          `).join("")}
+        </div>
 
-          <button class="reset-btn" onclick="location.reload()">重新测试</button>
+        <div class="nav">
+          <button class="nav-btn" ${currentStep === 0 ? "disabled" : ""} id="backBtn">上一步</button>
+          <button class="nav-btn" id="skipBtn">稍后再细化</button>
         </div>
       `;
-      result.style.display = "block";
-      result.scrollIntoView({ behavior: "smooth" });
-    });
+
+      document.querySelectorAll(".option").forEach(el => {
+        el.addEventListener("click", () => {
+          answers[q.key] = el.dataset.value;
+          currentStep += 1;
+          if (currentStep < questions.length) {
+            renderQuestion();
+          } else {
+            renderResults();
+          }
+        });
+      });
+
+      document.getElementById("backBtn").addEventListener("click", () => {
+        if (currentStep > 0) {
+          currentStep -= 1;
+          renderQuestion();
+        }
+      });
+
+      document.getElementById("skipBtn").addEventListener("click", () => {
+        // V0.5 里跳过就默认进下一题，但保留空值兜底
+        currentStep += 1;
+        if (currentStep < questions.length) {
+          renderQuestion();
+        } else {
+          renderResults();
+        }
+      });
+    }
+
+    function budgetScore(userBudget, islandBudget) {
+      const map = { budget: 0, mid: 1, high: 2, ultra: 3 };
+      if (!userBudget) return 12;
+      const diff = Math.abs(map[userBudget] - map[islandBudget]);
+      if (diff === 0) return 24;
+      if (diff === 1) return 15;
+      if (diff === 2) return 6;
+      return 0;
+    }
+
+    function groupScore(userGroup, groups) {
+      if (!userGroup) return 10;
+      return groups.includes(userGroup) ? 18 : 4;
+    }
+
+    function priorityScore(userPriority, strengths) {
+      if (!userPriority) return 16;
+      return (strengths[userPriority] || 0) * 3.3;
+    }
+
+    function transferScore(userTransfer, islandTransfer) {
+      if (!userTransfer) return 8;
+      if (userTransfer === "any") return 10;
+      if (userTransfer === islandTransfer) return 14;
+      if (userTransfer === "domestic" && (islandTransfer === "boat" || islandTransfer === "seaplane")) return 10;
+      if (userTransfer === "seaplane" && islandTransfer === "boat") return 8;
+      return 1;
+    }
+
+    function vibeScore(userVibe, strengths) {
+      if (!userVibe) return 12;
+      const keyMap = {
+        relax: "relax",
+        romance: "romance",
+        luxury: "luxury",
+        nature: "marine",
+        photo: "photo"
+      };
+      return (strengths[keyMap[userVibe]] || 0) * 2.5;
+    }
+
+    function buildReasons(island) {
+      const reasons = [];
+
+      if (answers.priority === "marine") {
+        reasons.push(`你最看重海洋体验，而它在这项上表现为 ${island.strengths.marine}/10。`);
+      }
+      if (answers.priority === "scenery") {
+        reasons.push(`你更在意沙滩和海水颜值，而它在风景维度上有 ${island.strengths.scenery}/10。`);
+      }
+      if (answers.priority === "luxury") {
+        reasons.push(`你更在意酒店和服务，而它在奢华体验上有 ${island.strengths.luxury}/10。`);
+      }
+      if (answers.priority === "value") {
+        reasons.push(`你更看重性价比和省心，而它在性价比维度上有 ${island.strengths.value}/10。`);
+      }
+
+      if (answers.group && island.groups.includes(answers.group)) {
+        reasons.push(`它对“${labels.group[answers.group]}”这类客群的适配度比较高。`);
+      }
+
+      if (answers.transfer) {
+        if (answers.transfer === island.transfer) {
+          reasons.push(`它的上岛方式和你的接受度是直接匹配的。`);
+        } else if (answers.transfer === "any") {
+          reasons.push(`你对转运比较宽容，所以它不会因为交通被明显扣分。`);
+        }
+      }
+
+      if (answers.vibe) {
+        const vibeMap = {
+          relax: "轻松躺平",
+          romance: "浪漫蜜月感",
+          luxury: "奢华仪式感",
+          nature: "原生态海洋体验",
+          photo: "网红拍照感"
+        };
+        reasons.push(`你的度假气质更偏“${vibeMap[answers.vibe]}”，它在这个方向上比较贴合。`);
+      }
+
+      return reasons.slice(0, 3);
+    }
+
+    function calculateResults() {
+      return islands.map(island => {
+        const score =
+          budgetScore(answers.budget, island.budget) +
+          groupScore(answers.group, island.groups) +
+          priorityScore(answers.priority, island.strengths) +
+          transferScore(answers.transfer, island.transfer) +
+          vibeScore(answers.vibe, island.strengths);
+
+        return {
+          ...island,
+          score: Math.round(score),
+          reasons: buildReasons(island)
+        };
+      }).sort((a, b) => b.score - a.score).slice(0, 3);
+    }
+
+    function renderResults() {
+      const results = calculateResults();
+      updateProgress();
+      progressBar.style.width = "100%";
+
+      panel.className = "result-wrap fade-in";
+      panel.innerHTML = `
+        <div class="result-hero glass">
+          <h2>这是我为你挑出来的 3 个更适合的海岛方向</h2>
+          <p>
+            这版是 V0.5，所以先用规则推荐，而不是最终版 AI。
+            我会根据你的预算、同行人群、最在意的体验、对上岛方式的接受度和度假感觉，给每个岛打一个匹配分。
+          </p>
+
+          <div class="answers-chip-wrap">
+            ${Object.keys(answers).map(key => `
+              <div class="chip">${labels[key][answers[key]] || answers[key]}</div>
+            `).join("")}
+          </div>
+        </div>
+
+        <div class="cards">
+          ${results.map((item, index) => `
+            <div class="result-card" style="background-image:
+              linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.18) 35%, rgba(0,0,0,.72)),
+              url('${item.image}');
+            ">
+              <div class="result-content">
+                <div class="rank">${index === 0 ? "🏆 第一推荐" : index === 1 ? "🥈 第二推荐" : "🥉 第三推荐"}</div>
+
+                <div class="result-title-row">
+                  <div class="result-title">
+                    <h3>${item.name}</h3>
+                    <p>${item.en} · ${item.style}</p>
+                  </div>
+                  <div class="score-badge">
+                    <strong>${item.score}</strong>
+                    <span>匹配分</span>
+                  </div>
+                </div>
+
+                <div class="summary">${item.summary}</div>
+
+                <div class="meta-grid">
+                  <div class="meta-item">
+                    <small>预算带</small>
+                    <strong>${item.meta.budget}</strong>
+                  </div>
+                  <div class="meta-item">
+                    <small>上岛方式</small>
+                    <strong>${item.meta.transfer}</strong>
+                  </div>
+                  <div class="meta-item">
+                    <small>更适合谁</small>
+                    <strong>${item.meta.bestFor}</strong>
+                  </div>
+                  <div class="meta-item">
+                    <small>整体气质</small>
+                    <strong>${item.meta.atmosphere}</strong>
+                  </div>
+                </div>
+
+                <div class="why">
+                  <h4>为什么推荐你看这个</h4>
+                  <ul>
+                    ${item.reasons.map(reason => `<li>${reason}</li>`).join("")}
+                  </ul>
+                </div>
+
+                <div class="tag-list">
+                  ${item.tags.map(tag => `<div class="tag">${tag}</div>`).join("")}
+                  <div class="tag">需要知道：${item.tradeoff}</div>
+                </div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+
+        <div class="result-actions">
+          <button class="action-btn primary-btn" id="restartBtn">重新测试</button>
+          <button class="action-btn secondary-btn" id="editBtn">回到第一题再改</button>
+        </div>
+
+        <div class="note">
+          图片先用氛围示意图，后面你可以替换成每个海岛/酒店的真实图。<br>
+          这版重点是先看问卷流程、页面美感和推荐结果结构。
+        </div>
+      `;
+
+      document.getElementById("restartBtn").addEventListener("click", () => {
+        Object.keys(answers).forEach(key => delete answers[key]);
+        currentStep = 0;
+        renderQuestion();
+      });
+
+      document.getElementById("editBtn").addEventListener("click", () => {
+        currentStep = 0;
+        renderQuestion();
+      });
+    }
+
+    renderQuestion();
   </script>
 </body>
 </html>
