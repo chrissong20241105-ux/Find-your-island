@@ -102,7 +102,7 @@
 <body>
     <div class="container">
         <h1>🏝️ 找到你的完美海岛 🏝️</h1>
-        <p style="text-align: center; font-size: 1.2em; color: #555;">回答几个问题，帮你推荐最适合你的海岛</p>
+        <p style="text-align: center; font-size: 1.2em; color: #555;">回答几个问题，帮你推荐最适合你的马尔代夫海岛</p>
 
         <form id="quizForm">
             <!-- 问题 1 -->
@@ -112,53 +112,53 @@
                     <div class="option">
                         <label>
                             <input type="radio" name="q1" value="a" required>
-                            细腻粉白的私人沙滩，人少安静
+                            A. 细腻粉白的私人沙滩，人少安静
                         </label>
                     </div>
                     <div class="option">
                         <label>
                             <input type="radio" name="q1" value="b">
-                            热闹沙滩，有很多水上活动
+                            B. 热闹沙滩，有很多水上活动
                         </label>
                     </div>
                     <div class="option">
                         <label>
                             <input type="radio" name="q1" value="c">
-                            原始野沙滩，保留自然风貌
+                            C. 原始野沙滩，保留自然风貌
                         </label>
                     </div>
                     <div class="option">
                         <label>
                             <input type="radio" name="q1" value="d">
-                            拖尾白沙滩，拍照超级出片</label>
+                            D. 拖尾白沙滩，拍照超级出片</label>
 </div>
 </div>
-</div>  <!-- 问题 2 -->
+</div>   <!-- 问题 2 -->
         <div class="question">
             <h3>2. 你的预算大概是？</h3>
             <div class="options">
                 <div class="option">
                     <label>
                         <input type="radio" name="q2" value="a" required>
-                        奢华享受，预算不敏感
+                        A. 奢华享受，预算不敏感
                     </label>
                 </div>
                 <div class="option">
                     <label>
                         <input type="radio" name="q2" value="b">
-                        中等预算，性价比优先
+                        B. 中等预算，性价比优先
                     </label>
                 </div>
                 <div class="option">
                     <label>
                         <input type="radio" name="q2" value="c">
-                        经济型，省钱为主
+                        C. 经济型，省钱为主
                     </label>
                 </div>
                 <div class="option">
                     <label>
                         <input type="radio" name="q2" value="d">
-                        一价全包，预算中等偏上
+                        D. 一价全包，预算中等偏上
                     </label>
                 </div>
             </div>
@@ -170,25 +170,25 @@
                 <div class="option">
                     <label>
                         <input type="radio" name="q3" value="a" required>
-                        蜜月度假，二人世界
+                        A. 蜜月度假，二人世界
                     </label>
                 </div>
                 <div class="option">
                     <label>
                         <input type="radio" name="q3" value="b">
-                        亲子出游，带家人孩子
+                        B. 亲子出游，带家人孩子
                     </label>
                 </div>
                 <div class="option">
                     <label>
                         <input type="radio" name="q3" value="c">
-                        潜水探险，看海洋生物
+                        C. 潜水探险，看海洋生物
                     </label>
                 </div>
                 <div class="option">
                     <label>
                         <input type="radio" name="q3" value="d">
-                        休闲度假+拍照打卡
+                        D. 休闲度假+拍照打卡
                     </label>
                 </div>
             </div>
@@ -202,40 +202,101 @@
     </div>
 </div>
 <script>
-    // 海岛数据
+    // 海岛数据库 - 每个组合对应不同海岛
     const islands = {
-        "aaa": {
+        // 芙拉薇莉岛 - 当 q1=d 或者 q2=d 或者 q3=d 时推荐
+        "ddd": {
             name: "芙拉薇莉岛（Furaveri）",
-            description: "芙拉薇莉岛是马尔代夫一座奢华的私人度假村岛屿，拥有令人惊叹的拖尾白沙滩和清澈的蓝色泻湖。这里一价全包，服务完善，非常适合蜜月度假和休闲拍照。",
-            features: ["✨ 拖尾白沙滩", "🏨 奢华度假村", "🍽️ 一价全包", "🤿 优秀浮潜"],
-            bestFor: "蜜月度假、休闲拍照、预算中等偏上"
+            description: "芙拉薇莉岛是马尔代夫北部一座美丽的度假岛屿，拥有标志性的长长拖尾白沙滩和清澈的蓝色泻湖。这里是一价全包奢华度假村，设施非常新，服务也很好。",
+            features: [
+                "✨ 标志性拖尾白沙滩，拍照超级出片",
+                "🏨 2019年新开度假村，设施非常新",
+                "🍽️ 一价全包，多个餐厅随便吃",
+                "🤿 浮潜环境好，出门就能看到珊瑚和鱼",
+                "🏊 有超大无边泳池"
+            ],
+            bestFor: "休闲度假、拍照打卡、蜜月、一价全包体验"
         },
-        "aab": {
+        "dda": {
             name: "芙拉薇莉岛（Furaveri）",
-            description: "芙拉薇莉岛设施完善，有多个泳池和儿童俱乐部，适合家庭出游。沙滩干净美丽，一价全包省心省力。",
-            features: ["🏊‍♂️ 儿童友好", "🍔 多样餐饮", "🌴 美丽沙滩", "📸 拍照出片"],
-            bestFor: "亲子家庭、一价全包体验"
+            description: "芙拉薇莉岛非常适合蜜月度假，私密又浪漫，长长的拖尾沙滩二人世界非常惬意。",
+            features: [
+                "🥂 浪漫私密氛围",
+                "📸 拍照绝美",
+                "🍷 香槟早餐安排",
+                "💑 蜜月赠送水果和香槟"
+            ],
+            bestFor: "蜜月度假、拍照婚纱"
         },
-        "aad": {
+        "ddb": {
             name: "芙拉薇莉岛（Furaveri）",
-            description: "芙拉薇莉岛拥有绝佳的浮潜环境，周边珊瑚丰富，鱼类繁多。同时沙滩优美，满足你既想潜水又想休闲度假的需求。",
-            features: ["🤿 丰富浮潜", "🌊 蓝色泻湖", "🏝️ 拖尾沙滩", "🍷 优质服务"],
-            bestFor: "浮潜爱好者、综合型度假"
-        },
-        "ada": {
-            name: "芙拉薇莉岛（Furaveri）",
-            description: "芙拉薇莉岛完美满足休闲度假和拍照需求，标志性的拖尾沙滩怎么拍都好看，吹着海风享受悠闲假期。",
-            features: ["📸 拍照圣地", "🍹 无边泳池", "👣 长长的拖尾沙滩", "🍴 多个餐厅选择"],
-            bestFor: "休闲度假、摄影爱好者"
-        }
-    };document.getElementById('quizForm').addEventListener('submit', function(e) {
-e.preventDefault();   const q1 = document.querySelector('input[name="q1"]:checked').value;
+            description: "芙拉薇莉岛有儿童俱乐部，沙滩平缓水浅，很适合带孩子来玩。一价全包也省得操心安排餐饮。",
+            features: [
+                "👶 儿童俱乐部免费",
+                "🏖️ 平缓沙滩适合孩子玩耍",
+                "🍔 儿童餐选择多",
+                "👨‍👩‍👧‍👦 房间空间大"
+            ],bestFor: "亲子家庭出游"
+},
+"ddc":
+{
+name: "芙拉薇莉岛（Furaveri）",
+description: "芙拉薇莉岛周边珊瑚保护得很好，浮潜就能看到很多鱼和海龟，同时沙滩本身也很美。",
+features: [
+"🤿 离岸浮潜A级",
+"🐢 经常看到海龟",
+"🌊 珊瑚种类丰富",
+"🏝️ 沙滩浮潜双丰收"
+],
+bestFor: "浮潜爱好者+休闲度假"
+},
+"ada": {
+name: "芙拉薇莉岛（Furaveri）",
+description: "芙拉薇莉岛完美满足你休闲度假+拍照的需求，每一天都很出片。",
+features: [
+"📸 每一处都是拍照点",
+"👣 走在拖尾沙滩上太治愈",
+"🍹 泳池酒吧打卡拍照",
+"☀️ 蓝绿色海水太美了"
+],
+bestFor: "休闲度假、摄影爱好者"
+},
+// 示例：其他海岛 - 你可以继续照着这个格式添加
+"aaa": {
+name: "白马庄园（Cheval Blanc）",
+description: "LV集团旗下顶级奢华度假村，极致服务享受，适合预算充足追求品质的客人。",
+features: [
+"💎 顶级奢华服务",
+"🍾 私人泳池别墅",
+"👨‍🍳 米其林主厨餐厅",
+"🛥️ 免费快艇接送"
+],
+bestFor: "奢华度假、预算不敏感"
+},
+"bbc": {
+name: "居民岛（Local Island）",
+description: "性价比超高的经济型选择，可以体验当地文化，房价物价都便宜。",
+features: [
+"💰 花费只有度假村的1/10",
+"👨‍👩‍👧‍👦 体验当地生活",
+"🚌 方便跳岛游",
+"🍴 当地美食便宜好吃"
+],
+bestFor: "背包客、经济型旅行"
+}
+// 你可以继续加更多... 按照 "key": { 海岛信息 }, 格式添加
+};document.getElementById('quizForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // 获取用户选择
+        const q1 = document.querySelector('input[name="q1"]:checked').value;
         const q2 = document.querySelector('input[name="q2"]:checked').value;
         const q3 = document.querySelector('input[name="q3"]:checked').value;
         const key = q1 + q2 + q3;
         let resultHtml = "";
         
         if (islands[key]) {
+            // 找到了对应的组合，直接推荐
             const island = islands[key];
             resultHtml = `
                 <div class="island-card">
@@ -245,12 +306,12 @@ e.preventDefault();   const q1 = document.querySelector('input[name="q1"]:checke
                     <ul>
                         ${island.features.map(f => `<li>${f}</li>`).join('')}
                     </ul>
-                    <p><strong>👍 适合：</strong>${island.bestFor}</p>
+                    <p><strong>👍 适合人群：</strong>${island.bestFor}</p>
                 </div>
             `;
         } else if (key.includes('d')) {
-            // 只要选了第四个选项任意一个，都推荐芙拉薇莉
-            const island = islands["ada"];
+            // 只要选了第四个选项任意一个，默认推荐芙拉薇莉
+            const island = islands["ddd"];
             resultHtml = `
                 <div class="island-card">
                     <h3>🏝️ ${island.name}</h3>
@@ -259,11 +320,14 @@ e.preventDefault();   const q1 = document.querySelector('input[name="q1"]:checke
                     <ul>
                         ${island.features.map(f => `<li>${f}</li>`).join('')}
                     </ul>
-                    <p><strong>👍 适合：</strong>${island.bestFor}</p>
+                    <p><strong>👍 适合人群：</strong>${island.bestFor}</p>
                 </div>
             `;
         } else {
-            resultHtml = `<p>根据你的选择，芙拉薇莉岛也是很不错的选择哦！</p>`;
+            // 其他组合匹配不到可以提示
+            resultHtml = `
+                <p>根据你的选择，目前数据库里还没有完全匹配的海岛，可以试试调整选项再看看，或者联系我添加新海岛！</p>
+            `;
         }
         document.getElementById('resultContent').innerHTML = resultHtml;
         document.getElementById('result').style.display = 'block';
@@ -271,8 +335,8 @@ e.preventDefault();   const q1 = document.querySelector('input[name="q1"]:checke
     });
     function resetQuiz() {
         document.getElementById('quizForm').reset();
-        document.getElementById('result').style.display = 'none';
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-</script></body>
+        document.getElementById('result').style.display = 'none';window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
 </html>
