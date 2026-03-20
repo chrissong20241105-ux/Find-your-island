@@ -2,57 +2,277 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的海岛 - Find your island</title>
+    <title>Find your island - 发现你的完美海岛</title>
     <style>
         body { 
             font-family: Arial, sans-serif; 
-            max-width: 1000px; 
+            max-width: 800px; 
             margin: 0 auto; 
-            padding: 20px;
-            background-color: #e0f7fa;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #87CEEB 0%, #1E90FF 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
         h1 { 
             color: #006064; 
             text-align: center;
-            font-size: 2.5em;
+            font-size: 2.3em;
+            margin-top: 0;
         }
-        .island { 
-            margin: 30px 0; 
-            padding: 25px; 
-            border-radius: 15px; 
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        .question {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f0f8ff;
+            border-radius: 12px;
         }
-        h2 { 
-            color: #0288d1; 
-            border-bottom: 2px solid #b3e5fc;
-            padding-bottom: 10px;
+        h3 {
+            color: #0277bd;
+            margin-top: 0;
         }
-        img { 
-            max-width: 100%; 
-            height: auto; 
+        .options {
+            display: grid;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .option label {
+            display: block;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e1f5fe;
             border-radius: 8px;
-            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .info { 
-            line-height: 1.8;
-            font-size: 1.1em;
-            color: #37474f;
+        .option input {
+            margin-right: 10px;
+        }
+        .option label:hover {
+            border-color: #0288d1;
+            background: #fafafa;
+        }
+        button {
+            background: #0288d1;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #01579b;
+        }
+        .result {
+            margin-top: 40px;
+            padding: 30px;
+            background: #e0f7fa;
+            border-radius: 12px;
+            display: none;
+        }
+        .result h2 {
+            color: #006064;
+            margin-top: 0;
+        }
+        .island-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .island-card h3 {
+            color: #0288d1;
+        }
+        .reset-btn {
+            background: #78909c;
+            margin-top: 20px;
+        }
+        .reset-btn:hover {
+            background: #546e7a;
         }
     </style>
 </head>
 <body>
-    <h1>🌴 发现你的完美海岛 🌴</h1>
+    <div class="container">
+        <h1>🏝️ 找到你的完美海岛 🏝️</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #555;">回答几个问题，帮你推荐最适合你的海岛</p>
 
-    <div class="island">
-        <h2>🏝️ 芙拉薇莉岛（Furaveri Island）</h2>
-        <div class="info">
-            <p><strong>📍 位置：</strong>马尔代夫 印度洋</p>
-            <p><strong>✨ 特色：</strong>绵延的白沙滩、清澈见底的蓝绿色海水、一价全包奢华度假村</p>
-            <p><strong>📝 介绍：</strong>芙拉薇莉岛是马尔代夫北部一座美丽的度假岛屿，拥有壮观的蓝色泻湖和丰富的海洋生物。岛上设施完善，拥有多个餐厅、泳池和水上活动中心，是蜜月度假和亲子旅游的完美选择。</p>
-            <p><strong>🏊‍♂️ 活动：</strong>浮潜、潜水、桨板冲浪、出海观鲸</p>
+        <form id="quizForm">
+            <!-- 问题 1 -->
+            <div class="question">
+                <h3>1. 你更喜欢什么样的沙滩？</h3>
+                <div class="options">
+                    <div class="option">
+                        <label>
+                            <input type="radio" name="q1" value="a" required>
+                            细腻粉白的私人沙滩，人少安静
+                        </label>
+                    </div>
+                    <div class="option">
+                        <label>
+                            <input type="radio" name="q1" value="b">
+                            热闹沙滩，有很多水上活动
+                        </label>
+                    </div>
+                    <div class="option">
+                        <label>
+                            <input type="radio" name="q1" value="c">
+                            原始野沙滩，保留自然风貌
+                        </label>
+                    </div>
+                    <div class="option">
+                        <label>
+                            <input type="radio" name="q1" value="d">
+                            拖尾白沙滩，拍照超级出片</label>
+</div>
+</div>
+</div>  <!-- 问题 2 -->
+        <div class="question">
+            <h3>2. 你的预算大概是？</h3>
+            <div class="options">
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q2" value="a" required>
+                        奢华享受，预算不敏感
+                    </label>
+                </div>
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q2" value="b">
+                        中等预算，性价比优先
+                    </label>
+                </div>
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q2" value="c">
+                        经济型，省钱为主
+                    </label>
+                </div>
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q2" value="d">
+                        一价全包，预算中等偏上
+                    </label>
+                </div>
+            </div>
         </div>
+        <!-- 问题 3 -->
+        <div class="question">
+            <h3>3. 你旅行的主要目的是？</h3>
+            <div class="options">
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q3" value="a" required>
+                        蜜月度假，二人世界
+                    </label>
+                </div>
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q3" value="b">
+                        亲子出游，带家人孩子
+                    </label>
+                </div>
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q3" value="c">
+                        潜水探险，看海洋生物
+                    </label>
+                </div>
+                <div class="option">
+                    <label>
+                        <input type="radio" name="q3" value="d">
+                        休闲度假+拍照打卡
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button type="submit">🔍 为我推荐海岛</button>
+    </form>
+    <div id="result" class="result">
+        <h2>🎉 为你推荐：</h2>
+        <div id="resultContent"></div>
+        <button type="button" class="reset-btn" onclick="resetQuiz()">🔄 重新开始</button>
     </div>
-
-</body>
+</div>
+<script>
+    // 海岛数据
+    const islands = {
+        "aaa": {
+            name: "芙拉薇莉岛（Furaveri）",
+            description: "芙拉薇莉岛是马尔代夫一座奢华的私人度假村岛屿，拥有令人惊叹的拖尾白沙滩和清澈的蓝色泻湖。这里一价全包，服务完善，非常适合蜜月度假和休闲拍照。",
+            features: ["✨ 拖尾白沙滩", "🏨 奢华度假村", "🍽️ 一价全包", "🤿 优秀浮潜"],
+            bestFor: "蜜月度假、休闲拍照、预算中等偏上"
+        },
+        "aab": {
+            name: "芙拉薇莉岛（Furaveri）",
+            description: "芙拉薇莉岛设施完善，有多个泳池和儿童俱乐部，适合家庭出游。沙滩干净美丽，一价全包省心省力。",
+            features: ["🏊‍♂️ 儿童友好", "🍔 多样餐饮", "🌴 美丽沙滩", "📸 拍照出片"],
+            bestFor: "亲子家庭、一价全包体验"
+        },
+        "aad": {
+            name: "芙拉薇莉岛（Furaveri）",
+            description: "芙拉薇莉岛拥有绝佳的浮潜环境，周边珊瑚丰富，鱼类繁多。同时沙滩优美，满足你既想潜水又想休闲度假的需求。",
+            features: ["🤿 丰富浮潜", "🌊 蓝色泻湖", "🏝️ 拖尾沙滩", "🍷 优质服务"],
+            bestFor: "浮潜爱好者、综合型度假"
+        },
+        "ada": {
+            name: "芙拉薇莉岛（Furaveri）",
+            description: "芙拉薇莉岛完美满足休闲度假和拍照需求，标志性的拖尾沙滩怎么拍都好看，吹着海风享受悠闲假期。",
+            features: ["📸 拍照圣地", "🍹 无边泳池", "👣 长长的拖尾沙滩", "🍴 多个餐厅选择"],
+            bestFor: "休闲度假、摄影爱好者"
+        }
+    };document.getElementById('quizForm').addEventListener('submit', function(e) {
+e.preventDefault();   const q1 = document.querySelector('input[name="q1"]:checked').value;
+        const q2 = document.querySelector('input[name="q2"]:checked').value;
+        const q3 = document.querySelector('input[name="q3"]:checked').value;
+        const key = q1 + q2 + q3;
+        let resultHtml = "";
+        
+        if (islands[key]) {
+            const island = islands[key];
+            resultHtml = `
+                <div class="island-card">
+                    <h3>🏝️ ${island.name}</h3>
+                    <p><strong>📝 介绍：</strong>${island.description}</p>
+                    <p><strong>✨ 特色：</strong></p>
+                    <ul>
+                        ${island.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    <p><strong>👍 适合：</strong>${island.bestFor}</p>
+                </div>
+            `;
+        } else if (key.includes('d')) {
+            // 只要选了第四个选项任意一个，都推荐芙拉薇莉
+            const island = islands["ada"];
+            resultHtml = `
+                <div class="island-card">
+                    <h3>🏝️ ${island.name}</h3>
+                    <p><strong>📝 介绍：</strong>${island.description}</p>
+                    <p><strong>✨ 特色：</strong></p>
+                    <ul>
+                        ${island.features.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                    <p><strong>👍 适合：</strong>${island.bestFor}</p>
+                </div>
+            `;
+        } else {
+            resultHtml = `<p>根据你的选择，芙拉薇莉岛也是很不错的选择哦！</p>`;
+        }
+        document.getElementById('resultContent').innerHTML = resultHtml;
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('result').scrollIntoView({behavior: 'smooth'});
+    });
+    function resetQuiz() {
+        document.getElementById('quizForm').reset();
+        document.getElementById('result').style.display = 'none';
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script></body>
 </html>
