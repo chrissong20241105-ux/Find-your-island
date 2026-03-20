@@ -1,556 +1,464 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>找到你的完美马尔代夫海岛 | 无广告真实推荐</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body { 
-            font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif; 
-            max-width: 850px; 
-            margin: 0 auto; 
-            padding: 30px 20px;
-            background: linear-gradient(135deg, #87CEEB 0%, #1E90FF 100%);
-            min-height: 100vh;
-        }
-        .container {
-            background: white;
-            border-radius: 24px;
-            padding: 45px 35px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.18);
-        }
-        h1 { 
-            color: #006064; 
-            text-align: center;
-            font-size: 2.4em;
-            margin-top: 0;
-            margin-bottom: 12px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #555;
-            font-size: 1.15em;
-            line-height: 1.6;
-            margin-bottom: 45px;
-        }
-        .question {
-            margin: 28px 0;
-            padding: 25px;
-            background: #f0f8ff;
-            border-radius: 16px;
-        }
-        h3 {
-            color: #0277bd;
-            margin-top: 0;
-            font-size: 1.35em;
-            margin-bottom: 18px;
-        }
-        .options {
-            display: grid;
-            gap: 14px;
-            margin-top: 15px;
-        }
-        .option label {
-            display: block;
-            padding: 16px;
-            background: white;
-            border: 2px solid #e1f5fe;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.05em;
-            line-height: 1.5;
-        }
-        .option input {
-            margin-right: 12px;
-            transform: scale(1.2);
-        }
-        .option label:hover {
-            border-color: #0288d1;
-            background: #fafbfc;
-            transform: translateX(4px);
-        }
-        button {
-            background: #0288d1;
-            color: white;
-            border: none;
-            padding: 16px 45px;
-            font-size: 1.25em;
-            border-radius: 10px;
-            cursor: pointer;
-            display: block;
-            margin: 35px auto;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(2, 136, 209, 0.3);
-        }
-        button:hover {
-            background: #01579b;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(2, 136, 209, 0.4);
-        }
-        .result {
-            margin-top: 45px;
-            padding: 30px;
-            background: #e0f7fa;
-            border-radius: 16px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .result h2 {
-            color: #006064;
-            margin-top: 0;
-            text-align: center;
-            font-size: 1.8em;
-            margin-bottom: 25px;
-        }
-        .island-card {
-            background: white;
-            padding: 30px;
-            border-radius: 14px;
-            margin-top: 20px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-        .island-card h3 {
-            color: #0288d1;
-            font-size: 1.8em;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .island-desc {
-            text-align: center;
-            font-size: 1.05em;
-            line-height: 1.7;
-            color: #444;
-            margin-bottom: 20px;
-        }
-        .island-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 20px 0;
-        }.info-item {
-background: #f8fbff;
-padding: 12px 15px;
-border-radius: 8px;
-}
-.info-item strong {
-color: #0277bd;
-font-size: 1.02em;
-}
-.info-item span {
-color: #333;
-line-height: 1.6;
-}
-.features-list {
-margin-top: 20px;
-}
-.features-list h4 {
-color: #0277bd;
-margin-bottom: 10px;
-font-size: 1.2em;
-}
-.features-list ul {
-padding-left: 20px;
-line-height: 1.8;
-}
-.pros-cons {
-margin-top: 20px;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 16px;
-}
-.pros, .cons {
-padding: 15px;
-border-radius: 8px;
-}
-.pros {
-background: #e8f5e9;
-}
-.cons {
-background: #ffebee;
-}
-.pros h4, .cons h4 {
-margin-top: 0;
-margin-bottom: 8px;
-}
-.pros h4 {
-color: #2e7d32;
-}
-.cons h4 {
-color: #c62828;
-}
-.reset-btn {
-background: #78909c;
-margin-top: 25px;
-}
-.reset-btn:hover {
-background: #546e7a;
-}
-@media (max-width: 650px) {
-.island-grid, .pros-cons {
-grid-template-columns: 1fr;
-}
-.container {
-padding: 25px 18px;
-}
-h1 {
-font-size: 1.9em;
-}
-}
-.intro {
-background: #f5faff;
-padding: 20px;
-border-radius: 12px;
-margin-bottom: 30px;
-border-left: 4px solid #0288d1;
-}
-.intro p {
-color: #333;
-line-height: 1.7;
-font-size: 1.02em;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>找到你的完美马尔代夫海岛</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #87CEEB 0%, #1E90FF 100%);
+      min-height: 100vh;
+    }
+    .container {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 30px;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.18);
+    }
+    h1 {
+      color: #006064;
+      text-align: center;
+      font-size: 2.2em;
+      margin-bottom: 12px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #555;
+      font-size: 1.1em;
+      line-height: 1.6;
+      margin-bottom: 35px;
+    }
+    .intro {
+      background: #f5faff;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 28px;
+      border-left: 4px solid #0288d1;
+      line-height: 1.7;
+      color: #333;
+    }
+    .question {
+      margin: 22px 0;
+      padding: 22px;
+      background: #f0f8ff;
+      border-radius: 16px;
+    }
+    h3 {
+      color: #0277bd;
+      margin-bottom: 14px;
+      font-size: 1.2em;
+    }
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+    .option label {
+      display: block;
+      padding: 14px;
+      background: white;
+      border: 2px solid #e1f5fe;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s;
+      line-height: 1.5;
+    }
+    .option label:hover {
+      border-color: #0288d1;
+      transform: translateX(3px);
+    }
+    .option input {
+      margin-right: 10px;
+      transform: scale(1.15);
+    }
+    button {
+      background: #0288d1;
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.15em;
+      border-radius: 10px;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto;
+      transition: all 0.25s;
+      box-shadow: 0 4px 12px rgba(2,136,209,0.3);
+    }
+    button:hover {
+      background: #01579b;
+      transform: translateY(-2px);
+    }
+    .result {
+      margin-top: 35px;
+      padding: 28px;
+      background: #e0f7fa;
+      border-radius: 16px;
+      display: none;
+    }
+    .result h2 {
+      color: #006064;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .island-card {
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      margin-top: 18px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+    .island-card h3 {
+      color: #0288d1;
+      font-size: 1.5em;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .island-desc {
+      text-align: center;
+      font-size: 1em;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 16px;
+    }
+    .island-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .info-item {
+      background: #f8fbff;
+      padding: 12px 14px;
+      border-radius: 8px;
+      line-height: 1.6;
+    }
+    .features-list h4,
+    .pros h4,
+    .cons h4 {
+      margin-bottom: 8px;
+    }
+    .features-list ul,
+    .pros ul,
+    .cons ul {
+      padding-left: 18px;
+      line-height: 1.8;
+    }
+    .pros-cons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .pros {
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .cons {
+      background: #ffebee;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .reset-btn {
+      background: #78909c;
+    }
+    .reset-btn:hover {
+      background: #546e7a;
+    }
+    @media (max-width: 680px) {
+      .island-grid, .pros-cons {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 24px 18px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-<h1>🏝️ 找到你的完美马尔代夫海岛 🏝️</h1>
-<p class="subtitle">无广告 · 真实测评 · 智能匹配 · 找到最适合你的那座岛</p><input type="radio" name="q2" value="b">
-B. 👨‍👩‍👧‍👦 亲子家庭出游
-</label>
-</div>
-<div class="option">
-<label>
-<input type="radio" name="q2" value="c">
-C. 🤿 潜水爱好者（主要玩潜水）
-</label>
-</div>
-<div class="option">
-<label>
-<input type="radio" name="q2" value="d">
-D. 📷 休闲度假+拍照打卡
-</label>
-</div>
-</div>
-</div>snorkeling: "🤿 浮潜：⭐⭐⭐⭐ 出门就是好珊瑚",
-pros: [
-"拖尾沙滩拍照超级出片",
-"设施很新，一价全包省心",
-"浮潜A级，性价比高",
-"中文服务不错，中国人接待经验丰富"
-],
-cons: [
-"房型差异大，建议一定选泳池别墅",
-"旺季便宜房间容易提早预订"
-],
-features: [
-"✨ 标志性拖尾白沙滩",
-"🏨 2019年新开，设施全新",
-"🍽️ 一价全包，多个餐厅随便吃",
-"🤿 珊瑚保护好，浮潜体验佳",
-"🏊 岛上有超大无边泳池"
-]
-},
-// ========== 2. 白马庄园 ==========
-"aaa": {
-name: "白马庄园（Cheval Blanc）",
-description: "LV集团旗下顶奢马尔代夫度假村，极致服务和私密体验，是马尔代夫顶流天花板，预算无上限的选择。",
-budget: "💰 预算：两个人 35000元+/晚",
-bestFor: "👉 适合：奢华度假、蜜月",
-style: "💎 风格：老钱顶级奢华风",
-transfer: "✈️ 上岛：水飞约25分钟",
-food: "🍽️ 餐饮：米其林主厨，法式精致料理",
-sand: "🌴 沙滩：⭐⭐⭐⭐⭐ 私人沙滩细腻洁白",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐ 周边珊瑚不错",
-pros: [
-"LV品牌服务品质保证",
-"极度隐私安静，每家别墅空间巨大",
-"米其林餐饮体验一流",
-"蜜月布置非常浪漫"
-],
-cons: [
-"价格很贵，预算门槛高",
-"潜水很一般，要出海才能看到好珊瑚"
-],
-features: [
-"💎 LV集团顶级服务",
-"🏡 每栋都带私人泳池",
-"👨‍🍳 米其林主厨驻场",
-"🛥️ 免费水飞接送",
-"🕶️ 极致私密性"
-]
-},
-// ========== 3. 马富士居民岛 ==========
-"ddd": {
-name: "马富士居民岛（Maafushi）",
-description: "马尔代夫最成熟的经济型旅行目的地，性价比超高，预算有限想体验马尔代夫的首选，能真正感受当地生活。",
-budget: "💰 预算：两个人 2000-4000",
-bestFor: "👉 适合：背包客、经济型旅行、跳岛游",
-style: "🏝️ 风格：本土原生态风",
-transfer: "🛥️ 上岛：快艇约25分钟",
-food: "🍽️ 餐饮：多家当地餐厅，便宜好吃",
-sand: "🌴 沙滩：⭐⭐⭐ 不错的公共沙滩",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐ 周边超多优质潜点",
-pros: [
-"花费只有度假村的十分之一",
-"可以方便跳岛去周边潜点",
-"能体验真实马尔代夫当地人生活",
-"吃住都比想象中好很多"
-],
-cons: [
-"设施不如度假村奢华",
-"旺季人会有点多"
-],
-features: [
-"💰 花费超级便宜",
-"👨‍👩‍👧‍👦 体验当地生活",
-"🚌 方便出发去周边跳岛",
-"🍴 当地美食便宜好吃",
-"🪝 各种出海项目都能订"
-]
-},
-// ========== 4. 双鱼岛 ==========
-"cca": {
-name: "双鱼岛（Olhuveli）",
-description: "马尔代夫老牌经典五星岛，开了二十多年依然人气很旺，浮潜一流性价比高，是很多人第一次去马尔代夫的好选择。",
-budget: "💰 预算：两个人 8000-15000",
-bestFor: "👉 适合：潜水爱好者、性价比度假",
-style: "🌴 风格：经典热带度假风",
-transfer: "🛥️ 上岛：快艇约45分钟",
-food: "🍽️ 餐饮：可选半餐或一价全包，口碑不错",
-sand: "🌴 沙滩：⭐⭐⭐⭐ 长长的拖尾沙滩很漂亮",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐⭐ 离岸就是A级浮潜",
-pros: [
-"浮潜真的很棒，珊瑚好鱼多",
-"性价比很高，老牌服务稳定",
-"拖尾沙滩拍照好看",
-"价格一直比较良心"
-],
-cons: [
-"设施有点老，毕竟开业很早",
-"旺季预订紧张"
-],
-features: [
-"🤿 浮潜爱好者天堂",
-"💰 十多年老牌高性价比",
-"🐟 经常看到海龟鲨鱼",
-"🏄‍♂️ 水上项目齐全"
-]
-},
-// ========== 5. 瑞提拉 唯一岛 ==========
-"aca": {
-name: "瑞提拉（One&Only Reethi Rah）",
-description: "马尔代夫顶奢经典，超大独栋别墅，每栋都私享沙滩，老钱度假风代表，服务行业内公认标杆。",
-budget: "💰 预算：两个人 40000元+",
-bestFor: "👉 适合：高端度假、蜜月",
-style: "💰 风格：老钱优雅风",transfer: "🛥️ 上岛：快艇约50分钟",
-food: "🍽️ 餐饮：多国口味，亚洲菜好评",
-sand: "🌴 沙滩：⭐⭐⭐⭐⭐ 全岛沙滩都绝美",
-snorkeling: "🤿 浮潜：⭐⭐⭐ 不错，周边潜点多",
-pros: [
-"超大别墅，每家都有私人沙滩",
-"管家服务一流，非常贴心",
-"岛屿大人少，不会拥挤",
-"服务态度公认好评"
-],
-cons: [
-"价格很贵",
-"浮潜不是顶级"
-],
-features: [
-"🏡 超大别墅，户户私人沙滩",
-"👔 管家服务一流",
-"🌳 岛屿很大人少安静",
-"🍷 多个餐厅选择丰富",
-"💍 非常适合蜜月婚礼"
-]
-},
-// ========== 6. 索尼娃贾尼 ==========
-"abadc": {
-name: "索尼娃贾尼（Soneva Jani）",
-description: "现在马尔代夫最火的网红岛，屋顶滑梯直接入海，环保自然设计理念，年轻人网红打卡最爱，拍照超级出片。",
-budget: "💰 预算：两个人 30000-60000",
-bestFor: "👉 适合：网红打卡、拍照、蜜月",
-style: "📸 风格：现代网红轻奢风",
-transfer: "✈️ 上岛：水飞约40分钟",
-food: "🍽️ 餐饮：一价全包，创意料理",
-sand: "🌴 沙滩：⭐⭐⭐⭐⭐ 水清沙白",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐ 不错",
-pros: [
-"网红屋顶滑梯太出片",
-"环保自然设计理念，体验独特",
-"露天星空电影院，浪漫",
-"网红打卡必去"
-],
-cons: [
-"价格很贵",
-"网红岛旺季容易满房"
-],
-features: [
-"🛝 标志性屋顶滑梯直接入海",
-"🔭 露天影院，星空观影",
-"📸 每一个角落都好出片",
-"🌿 环保自然设计"
-]
-},
-// ========== 7. 阿雅达 ==========
-"bcacd": {
-name: "阿雅达（Ayada）",
-description: "马尔代夫西南端漂亮岛屿，超大蓝色泄湖，椰林茂密沙滩白，一价全包性价比高，蜜月赠送很多免费项目，很受中国人欢迎。",
-budget: "💰 预算：两个人 15000-30000",
-bestFor: "👉 适合：蜜月、一价全包度假",
-style: "🌴 风格：热带奢华风",
-transfer: "🛥️ 上岛：快艇约50分钟",
-food: "🍽️ 餐饮：一价全包，四个餐厅，口味适合中国人",
-sand: "🌴 沙滩：⭐⭐⭐⭐ 细腻洁白",
-snorkeling: "🤿 浮潜：⭐⭐⭐ 不错",
-pros: [
-"超大泄湖很美，拍照好看",
-"蜜月免费赠送很多项目",
-"一价全包性价比高",
-"中国客人接待经验丰富"
-],
-cons: [
-"泄湖太大，出门浮潜要走一点",
-"旺季房间比较紧张"
-],
-features: [
-"🌊 超大蓝色泄湖",
-"🌴 岛上椰林茂密",
-"💘 蜜月赠送免费布置",
-"💍 可以免费做简单婚礼布置",
-"📷 非常适合拍照"
-]
-},
-// ========== 8. 港丽岛 ==========
-"abcc": {
-name: "港丽岛（Conrad Rangali）",
-description: "希尔顿旗下旗舰马尔代夫岛，拥有全世界第一家海底餐厅，传奇经典岛屿，网红海底餐厅必须体验一次。",
-budget: "💰 价格很贵",
-bestFor: "👉 适合：网红打卡、旗舰体验、蜜月",
-style: "🐠 风格：科技网红旗舰风",
-transfer: "🛥️ 上岛：水飞约30分钟",
-food: "🍽️ 餐饮：海底餐厅必须体验，口味一流",
-sand: "🌴 沙滩：⭐⭐⭐⭐ 两个岛连在一起，沙滩都好",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐ 好",
-pros: [
-"世界闻名海底餐厅，一生一次体验",
-"两个岛屿相连，玩法多",
-"希尔顿旗舰品质，服务稳定",
-"海底餐厅拍照太绝了"
-],
-cons: [
-"价格很贵",
-"老别墅设施有点旧"
-],
-features: [
-"🐠 全世界第一家海底餐厅",
-"🌴 两个岛屿相连，多种体验",
-"🔌 设施现代",
-"🥂 希尔顿旗舰品质",
-"💑 蜜月非常浪漫"
-]
-},
-// ========== 9. 密度帕茹 ==========
-"cdac": {
-name: "密度帕茹（Meedhupparu）",
-description: "浮潜爱好者真正天堂，一价全包价格便宜，浮潜A级岸边就是珊瑚墙，各种鱼超级多，性价比极高适合纯粹潜水党。",
-budget: "💰 预算：两个人 6000-12000",
-bestFor: "👉 适合：浮潜爱好者、一价全包",style: "🤿 风格：原生态潜水风",
-transfer: "✈️ 上岛：水飞约35分钟",
-food: "🍽️ 餐饮：一价全包，口碑不错",
-sand: "🌴 沙滩：⭐⭐⭐ 不错",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐⭐ 顶级，出门就是珊瑚墙",
-pros: [
-"浮潜真的一流，不用出海",
-"一价全包性价比超高",
-"鱼类超级丰富，经常看到鲨鱼海龟",
-"价格亲民"
-],
-cons: [
-"设施比较简单，不是奢华型",
-"沙滩一般"
-],
-features: [
-"🤿 浮潜A级，出门就是珊瑚墙",
-"💰 一价全包性价比超高",
-"🐟 鱼类超多，经常见鲨鱼海龟",
-"🌊 适合天天泡在海里"
-]
-},
-// ========== 10. 鹦鹉螺 ==========
-"abadd": {
-name: "鹦鹉螺（Nautilus）",
-description: "马尔代夫新晋网红蜜月岛，全岛都是泳池别墅，设计现代轻奢，私密性非常好，非常适合二人世界。",
-budget: "💰 预算：两个人 25000-50000",
-bestFor: "👉 适合：蜜月、轻奢度假",
-style: "✨ 风格：现代轻奢风",
-transfer: "🛥️ 上岛：快艇约15分钟",
-food: "🍽️ 餐饮：点餐制，品质高",
-sand: "🌴 沙滩：⭐⭐⭐⭐ 拖尾沙滩漂亮",
-snorkeling: "🤿 浮潜：⭐⭐⭐⭐ 好",
-pros: [
-"全部都是泳池别墅",
-"超高私密性，适合二人世界",
-"设计感强，拍照好看",
-"服务贴心不打扰"
-],
-cons: [
-"价格偏高",
-"岛屿不大"
-],
-features: [
-"🏡 全部都是泳池别墅",
-"🔒 超高私密性",
-"💑 蜜月布置免费",
-"📸 设计感强拍照好看",
-"💆 服务贴心安静"
-]
-}
-};document.getElementById('quizForm').addEventListener('submit', function(e) {
-e.preventDefault();hed.budget}</strong></div>
-<div class="info-item"><span>${matched.bestFor}</span></div>
-<div class="info-item"><span>${matched.style}</span></div>
-<div class="info-item"><span>${matched.transfer}</span></div>
-<div class="info-item"><span>${matched.food}</span></div>
-<div class="info-item"><span>${matched.sand}</span></div>
-<div class="info-item"><span>${matched.snorkeling}</span></div>
-</div>
-<div class="features-list">
-<h4>✨ 特色亮点</h4>
-<ul>
-${matched.features.map(f => <li>${f}</li>).join('')
-</ul>
-</div>
-<div class="pros-cons">
-<div class="pros">
-<h4>✅ 优点</h4>
-<ul>
-${matched.pros.map(p => <li>${p}</li>).join('')
-</ul>
-</div>
-<div class="cons">
-<h4>⚠️ 缺点</h4>
-<ul>
-${matched.cons.map(c => <li>${c}</li>).join('')
-</ul>
-</div>
-</div>
-</div>
-;
-} else {
-resultHtml = 
-<p style="text-align: center; font-size: 1.1em;">
-根据你的选择，目前数据库里还没有完全匹配的海岛，试试调整选项再看看！
-</p>
-`;
-}
-}
+  <div class="container">
+    <h1>🏝️ 找到你的完美马尔代夫海岛</h1>
+    <p class="subtitle">无广告 · 真实测评 · 智能匹配 · 找到最适合你的那座岛</p>
+
+    <div class="intro">
+      先回答 4 个最关键的问题。我会根据你的预算、出行类型、体验偏好和上岛接受度，
+      给出最适合你的海岛推荐。
+    </div>
+
+    <form id="quizForm">
+      <div class="question">
+        <h3>1. 你的预算大概是？</h3>
+        <div class="options">
+          <div class="option"><label><input type="radio" name="budget" value="low" required> A. 性价比优先（两个人 2000-8000）</label></div>
+          <div class="option"><label><input type="radio" name="budget" value="mid"> B. 中高端度假（两个人 8000-20000）</label></div>
+          <div class="option"><label><input type="radio" name="budget" value="high"> C. 奢华体验（两个人 20000+）</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>2. 你更像哪类出行人群？</h3>
+        <div class="options">
+          <div class="option"><label><input type="radio" name="travelType" value="honeymoon" required> A. 蜜月 / 情侣</label></div>
+          <div class="option"><label><input type="radio" name="travelType" value="family"> B. 亲子家庭</label></div>
+          <div class="option"><label><input type="radio" name="travelType" value="diver"> C. 潜水 / 浮潜爱好者</label></div>
+          <div class="option"><label><input type="radio" name="travelType" value="photo"> D. 休闲度假 + 拍照打卡</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>3. 你最在意哪种体验？</h3>
+        <div class="options">
+          <div class="option"><label><input type="radio" name="priority" value="snorkeling" required> A. 浮潜和海洋生物</label></div>
+          <div class="option"><label><input type="radio" name="priority" value="luxury"> B. 酒店奢华和服务</label></div>
+          <div class="option"><label><input type="radio" name="priority" value="value"> C. 性价比和轻松度假</label></div>
+          <div class="option"><label><input type="radio" name="priority" value="photo"> D. 拍照出片和景色</label></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>4. 你能接受的上岛方式是？</h3>
+        <div class="options">
+          <div class="option"><label><input type="radio" name="transfer" value="fast" required> A. 越快越好，快艇最好</label></div>
+          <div class="option"><label><input type="radio" name="transfer" value="plane"> B. 可以接受水飞 / 内飞</label></div>
+          <div class="option"><label><input type="radio" name="transfer" value="any"> C. 只要岛好，多久都行</label></div>
+        </div>
+      </div>
+
+      <button type="submit">生成我的推荐</button>
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const islands = {
+      maafushi: {
+        name: "马富士居民岛（Maafushi）",
+        description: "马尔代夫最成熟的经济型旅行目的地，预算有限想体验马尔代夫的首选。",
+        budgetTag: "low",
+        travelTags: ["family", "photo"],
+        priorityTags: ["value"],
+        transferTag: "fast",
+        budget: "💰 预算：两个人 2000-4000",
+        bestFor: "👉 适合：背包客、经济型旅行、第一次去马代",
+        style: "🏝️ 风格：本土风情",
+        transfer: "🛥️ 上岛：快艇约25分钟",
+        food: "🍽️ 餐饮：本地餐厅多，便宜好吃",
+        sand: "🌴 沙滩：⭐⭐⭐",
+        snorkeling: "🤿 浮潜：⭐⭐⭐⭐",
+        features: [
+          "💰 花费低，性价比高",
+          "👨‍👩‍👧‍👦 适合家庭和年轻人",
+          "🍴 本地生活体验强",
+          "🚤 上岛方便"
+        ],
+        pros: [
+          "价格友好",
+          "交通方便",
+          "适合第一次体验马尔代夫",
+          "出海项目丰富"
+        ],
+        cons: [
+          "不够奢华",
+          "私密性一般",
+          "不是典型顶级度假村路线"
+        ]
+      },
+      chevalBlanc: {
+        name: "白马庄园（Cheval Blanc）",
+        description: "LV集团旗下顶奢马尔代夫度假村，极致服务和私密体验，是顶级奢华天花板。",
+        budgetTag: "high",
+        travelTags: ["honeymoon", "photo"],
+        priorityTags: ["luxury"],
+        transferTag: "plane",
+        budget: "💰 预算：两个人 35000+/晚",
+        bestFor: "👉 适合：奢华度假、顶级蜜月",
+        style: "💎 风格：老钱顶奢",
+        transfer: "✈️ 上岛：水飞约25分钟",
+        food: "🍽️ 餐饮：米其林主厨级别",
+        sand: "🌴 沙滩：⭐⭐⭐⭐⭐",
+        snorkeling: "🤿 浮潜：⭐⭐⭐⭐",
+        features: [
+          "💎 LV集团顶级服务",
+          "🏡 超大私人别墅",
+          "👨‍🍳 高端餐饮体验",
+          "🔒 私密度极高"
+        ],
+        pros: [
+          "服务天花板",
+          "非常适合蜜月",
+          "餐饮强",
+          "硬件顶级"
+        ],
+        cons: [
+          "价格极高",
+          "预算门槛高",
+          "不是主打性价比"
+        ]
+      },
+      olhuveli: {
+        name: "双鱼岛（Olhuveli）",
+        description: "老牌经典高性价比海岛，浮潜很强，是很多人第一次去马代的热门选择。",
+        budgetTag: "mid",
+        travelTags: ["diver", "honeymoon", "family"],
+        priorityTags: ["snorkeling", "value"],
+        transferTag: "fast",
+        budget: "💰 预算：两个人 8000-15000",
+        bestFor: "👉 适合：潜水爱好者、性价比度假",
+        style: "🌴 风格：经典热带度假风",
+        transfer: "🛥️ 上岛：快艇约45分钟",
+        food: "🍽️ 餐饮：半餐 / 一价全包可选",
+        sand: "🌴 沙滩：⭐⭐⭐⭐",
+        snorkeling: "🤿 浮潜：⭐⭐⭐⭐⭐",
+        features: [
+          "🤿 岸边浮潜非常好",
+          "💰 性价比高",
+          "🐟 容易看到海洋生物",
+          "📸 拖尾沙滩好拍"
+        ],
+        pros: [
+          "浮潜出色",
+          "价格相对合理",
+          "适合第一次住度假村",
+          "综合表现均衡"
+        ],
+        cons: [
+          "设施有些年份感",
+          "旺季较热门"
+        ]
+      },
+      sonevaJani: {
+        name: "索尼娃贾尼（Soneva Jani）",
+        description: "马代最有名的网红岛之一，屋顶滑梯、水上别墅和极强的视觉冲击力让它非常适合拍照和蜜月。",
+        budgetTag: "high",
+        travelTags: ["honeymoon", "photo"],
+        priorityTags: ["photo", "luxury"],
+        transferTag: "plane",
+        budget: "💰 预算：两个人 30000-60000",
+        bestFor: "👉 适合：网红打卡、拍照、蜜月",
+        style: "📸 风格：现代网红轻奢风",
+        transfer: "✈️ 上岛：水飞约40分钟",
+        food: "🍽️ 餐饮：创意料理",
+        sand: "🌴 沙滩：⭐⭐⭐⭐⭐",
+        snorkeling: "🤿 浮潜：⭐⭐⭐⭐",
+        features: [
+          "🛝 屋顶滑梯入海",
+          "📸 非常出片",
+          "🌌 星空体验浪漫",
+          "🌿 环保自然设计"
+        ],
+        pros: [
+          "拍照效果极强",
+          "很适合蜜月",
+          "品牌辨识度高",
+          "体验感独特"
+        ],
+        cons: [
+          "价格高",
+          "旺季难订",
+          "更偏拍照和体验，不是纯性价比路线"
+        ]
+      }
+    };
+
+    function calculateMatch(answers) {
+      const scores = [];
+
+      for (const key in islands) {
+        const island = islands[key];
+        let score = 0;
+
+        if (answers.budget === island.budgetTag) score += 3;
+        if (island.travelTags.includes(answers.travelType)) score += 3;
+        if (island.priorityTags.includes(answers.priority)) score += 4;
+
+        if (answers.transfer === "any") {
+          score += 2;
+        } else if (answers.transfer === island.transferTag) {
+          score += 2;
+        }
+
+        scores.push({ ...island, score });
+      }
+
+      scores.sort((a, b) => b.score - a.score);
+      return scores[0];
+    }
+
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const answers = {
+        budget: document.querySelector('input[name="budget"]:checked')?.value,
+        travelType: document.querySelector('input[name="travelType"]:checked')?.value,
+        priority: document.querySelector('input[name="priority"]:checked')?.value,
+        transfer: document.querySelector('input[name="transfer"]:checked')?.value
+      };
+
+      const matched = calculateMatch(answers);
+      const result = document.getElementById("result");
+
+      if (!matched) {
+        result.style.display = "block";
+        result.innerHTML = `
+          <h2>暂时没有匹配结果</h2>
+          <p style="text-align:center;">请调整一下你的选项后重试。</p>
+        `;
+        return;
+      }
+
+      result.innerHTML = `
+        <h2>🎯 你的推荐结果</h2>
+        <div class="island-card">
+          <h3>${matched.name}</h3>
+          <p class="island-desc">${matched.description}</p>
+
+          <div class="island-grid">
+            <div class="info-item"><strong>${matched.budget}</strong></div>
+            <div class="info-item"><span>${matched.bestFor}</span></div>
+            <div class="info-item"><span>${matched.style}</span></div>
+            <div class="info-item"><span>${matched.transfer}</span></div>
+            <div class="info-item"><span>${matched.food}</span></div>
+            <div class="info-item"><span>${matched.sand}</span></div>
+            <div class="info-item"><span>${matched.snorkeling}</span></div>
+            <div class="info-item"><strong>匹配分：${matched.score}</strong></div>
+          </div>
+
+          <div class="features-list">
+            <h4>✨ 特色亮点</h4>
+            <ul>
+              ${matched.features.map(f => `<li>${f}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">
+              <h4>✅ 优点</h4>
+              <ul>
+                ${matched.pros.map(p => `<li>${p}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="cons">
+              <h4>⚠️ 缺点</h4>
+              <ul>
+                ${matched.cons.map(c => `<li>${c}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+
+          <button class="reset-btn" onclick="location.reload()">重新测试</button>
+        </div>
+      `;
+      result.style.display = "block";
+      result.scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
